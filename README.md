@@ -3,7 +3,7 @@
 A ~25-minute R&D all-hands talk on **harness engineering** — what separates an
 agent that ships from an agent that produces slop, and what that costs.
 
-### ▶ [View the deck](https://hochgi.github.io/how-to-ai-in-versatile/)
+### ▶ [View the deck](https://genpass.hochgi.com/how-to-ai-in-versatile/)
 
 Navigate with `←` / `→` or space; `f` for fullscreen. Several slides are
 interactive — the per-phase walkthrough, the staged definition, the per-tool
