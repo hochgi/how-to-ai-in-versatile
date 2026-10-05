@@ -1,0 +1,32 @@
+---
+config:
+  flowchart:
+    curve: rounded
+---
+flowchart TD
+  task{{"0 Given task"}}
+
+  subgraph writes["may write"]
+    specAuthor["1 spec-author<br/>Gherkin / EARS + mermaid<br/><i>writes: specs</i>"]
+    testAuthor["2 test-author<br/>RED component + unit tests<br/><i>writes: tests, interfaces, stubs</i>"]
+    coder["3 coder<br/>GREEN + typecheck + lint<br/><i>writes: production code</i>"]
+  end
+
+  subgraph readonly["read-only — cannot fix what it finds"]
+    reviewer["4 reviewer<br/>spec conformance + regression-dog"]
+    verifier["5 verifier<br/>CRAP on patch + incremental Stryker<br/>audits every Stryker disable by hand"]
+  end
+
+  done{{"6 Shippable slice"}}
+
+  task --> specAuthor
+  specAuthor -->|"docs/spec/**.feature + EARS"| testAuthor
+  testAuthor -->|"a RED suite"| coder
+  coder -->|"green + lint + typecheck + build"| reviewer
+  reviewer -->|"correctness verdict"| verifier
+  verifier --> done
+
+  verifier -.->|"spec hole"| specAuthor
+  verifier -.->|"missing test or meaningful mutant"| testAuthor
+  verifier -.->|"bug or hotspot extract"| coder
+  reviewer -.->|"needs changes"| coder
